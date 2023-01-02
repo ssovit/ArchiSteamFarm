@@ -135,9 +135,9 @@ internal static class ArchiKestrel {
 		Logging.InitHistoryLogger();
 
 		// TODO: Test and determine if this helps for kestrel certificates
-#pragma warning disable CA5386
-		ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
-#pragma warning restore CA5386
+#pragma warning disable CA5364, CA5386
+		ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+#pragma warning restore CA5364, CA5386
 
 		// Start the server
 		IHost? kestrelWebHost = null;

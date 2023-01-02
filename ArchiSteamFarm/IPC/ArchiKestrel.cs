@@ -25,6 +25,7 @@ using HostBuilder = Microsoft.AspNetCore.Hosting.WebHostBuilder;
 #endif
 using System;
 using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.IPC.Controllers.Api;
@@ -132,6 +133,11 @@ internal static class ArchiKestrel {
 
 		// Init history logger for /Api/Log usage
 		Logging.InitHistoryLogger();
+
+		// TODO: Test and determine if this helps for kestrel certificates
+#pragma warning disable CA5386
+		ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
+#pragma warning restore CA5386
 
 		// Start the server
 		IHost? kestrelWebHost = null;
